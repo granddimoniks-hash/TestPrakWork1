@@ -1,0 +1,14 @@
+{% extends "inventory/base.html" %}
+{% block title %}{{ object.name }}{% endblock %}
+{% block content %}
+<h1>{{ object.name }}</h1>
+<p><strong>Инвентарный номер:</strong> {{ object.inventory_number }}</p>
+<p><strong>Статус:</strong> {{ object.get_status_display }}</p>
+<p><strong>Поставщик:</strong> {{ object.supplier.name }}</p>
+<p><strong>Описание:</strong> {{ object.description|default:"—" }}</p>
+<p><strong>Дата создания:</strong> {{ object.created_at }}</p>
+
+<a href="{% url 'equipment_update' object.slug %}" class="btn">Редактировать</a>
+<a href="{% url 'equipment_delete' object.slug %}" class="btn btn-danger">Удалить</a>
+<a href="{% url 'equipment_list' %}" class="btn btn-secondary">Назад к списку</a>
+{% endblock %}

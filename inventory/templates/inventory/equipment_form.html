@@ -1,0 +1,21 @@
+{% extends "inventory/base.html" %}
+{% block title %}{{ title }}{% endblock %}
+{% block content %}
+<h1>{{ title }}</h1>
+<form method="post">
+    {% csrf_token %}
+    {% for field in form %}
+    <div class="form-group">
+        <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+        {{ field }}
+        {% if field.errors %}
+        <ul class="errorlist">
+            {% for error in field.errors %}<li>{{ error }}</li>{% endfor %}
+        </ul>
+        {% endif %}
+    </div>
+    {% endfor %}
+    <button type="submit" class="btn">Сохранить</button>
+    <a href="{% url 'equipment_list' %}" class="btn btn-secondary">Отмена</a>
+</form>
+{% endblock %}
